@@ -1,22 +1,11 @@
 {
-  description = "Nixos config flake";
-
   inputs = {
-    nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
-
-    home-manager = {
-      url = "github:nix-community/home-manager";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
+    nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
   };
-
-  outputs = { self, nixpkgs, ... }@inputs: {
-    nixosConfigurations.cask = nixpkgs.lib.nixosSystem {
-      specialArgs = {inherit inputs;};
-      modules = [
-        ./hosts/cask/configuration.nix
-        inputs.home-manager.nixosModules.default
-      ];
+  outputs = inputs@{ self, nixpkgs, ... }: {
+    nixosConfigurations.cask1 = nixpkgs.lib.nixosSystem {
+      modules = [ ./hosts/cask1/configuration.nix ];
     };
   };
 }
+
