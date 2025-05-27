@@ -1,10 +1,16 @@
 {
   inputs = {
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
-    home-manager.url = "github:nix-community/home-manager";
-    home-manager.inputs.nixpkgs.follows = "nixpkgs";
+    home-manager = {
+      url = "github:nix-community/home-manager";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+    firefox-addons = {
+      url = "gitlab:rycee/nur-expressions?dir=pkgs/firefox-addons";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
   };
-  outputs = inputs@{ self, nixpkgs, home-manager, ... }: {
+  outputs = inputs@{ self, nixpkgs, nur, home-manager, ... }: {
     nixosConfigurations.cask1 = nixpkgs.lib.nixosSystem {
       modules = [ 
         ./hosts/cask1/configuration.nix
@@ -19,8 +25,8 @@
           home-manager.useUserPackages = true;
 
           home-manager.users.elena = import hosts/annabellee2/home.nix;
-
-          # Optionally, use home-manager.extraSpecialArgs to pass arguments to home.nix
+	  home-manager.extraSpecialArgs = { inherit inputs; };
+          home-manager.backupFileExtension = "backup";
         }
       ];
     };

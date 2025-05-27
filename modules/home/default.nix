@@ -1,4 +1,4 @@
-{ config, pkgs, ... }:
+{ inputs, configs, pkgs, ... }:
 
 {
   imports = [
@@ -6,6 +6,7 @@
     ./hyfetch.nix
     ./alacritty.nix
     ./tmux.nix
+    ./firefox.nix
   ];
 
   # TODO please change the username & home directory to your own
