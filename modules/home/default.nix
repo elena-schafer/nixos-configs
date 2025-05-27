@@ -3,6 +3,7 @@
 {
   imports = [
     ./git.nix
+    ./hyfetch.nix
   ];
 
   # TODO please change the username & home directory to your own
@@ -35,7 +36,6 @@
     # here is some command line tools I use frequently
     # feel free to add your own or remove some of them
 
-    neofetch
     nnn # terminal file manager
 
     # archives
