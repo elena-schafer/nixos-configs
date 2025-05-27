@@ -67,7 +67,6 @@
     btop
     stow
     rofi-wayland
-    alacritty
     (discord.override {
       withOpenASAR = true;
       withVencord = true;
