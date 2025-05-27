@@ -9,7 +9,12 @@
     [ # Include the results of the hardware scan.
       ./hardware-configuration.nix
       ../../modules/nixos/hyprland.nix
+      ../../modules/nixos/firefox.nix
+      ../../modules/nixos/tmux.nix
+      ../../modules/nixos/nvidia.nix
     ];
+
+  nixpkgs.config.allowUnfree = true;
 
   # Use the systemd-boot EFI boot loader.
   boot.loader.grub = {
@@ -59,11 +64,14 @@
     wget
     curl
     git
-    tmux
     btop
     stow
     rofi-wayland
     alacritty
+    (discord.override {
+      withOpenASAR = true;
+      withVencord = true;
+    })
   ];
 
   # List services that you want to enable:
