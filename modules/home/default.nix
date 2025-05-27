@@ -5,6 +5,7 @@
     ./git.nix
     ./hyfetch.nix
     ./alacritty.nix
+    ./tmux.nix
   ];
 
   # TODO please change the username & home directory to your own

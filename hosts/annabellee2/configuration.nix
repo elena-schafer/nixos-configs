@@ -10,7 +10,6 @@
       ./hardware-configuration.nix
       ../../modules/nixos/hyprland.nix
       ../../modules/nixos/firefox.nix
-      ../../modules/nixos/tmux.nix
       ../../modules/nixos/nvidia.nix
     ];
 
