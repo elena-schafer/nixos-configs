@@ -12,7 +12,7 @@
       ../../modules/nixos/nvidia.nix
     ];
 
-  nixpkgs.config.allowUnfree = true;
+
 
   # Use the systemd-boot EFI boot loader.
   boot.loader.grub = {

@@ -11,12 +11,24 @@
     };
   };
   outputs = inputs@{ self, nixpkgs, nur, home-manager, ... }: {
+    # If we want to use some software early, overlays or patching are good trick to use
+    # https://wiki.nixos.org/wiki/Nixpkgs/Patching_Nixpkgs
+    # nixpkgs.overlays = [ (import ./overlay.nix) ];
+
+    # TODO: Would like to make it so hosts need not be defined here
+    # Rather automatically read the host options from the hosts/ dir and put them here
+    # https://ayats.org/blog/no-flake-utils
+
     nixosConfigurations.cask1 = nixpkgs.lib.nixosSystem {
+      nixpkgs.config.allowUnfree = true;
+      nix.settings.experimental-features = [ "nix-command" "flakes" ];
       modules = [ 
         ./hosts/cask1/configuration.nix
       ];
     };
     nixosConfigurations.annabellee2 = nixpkgs.lib.nixosSystem {
+      nixpkgs.config.allowUnfree = true;
+      nix.settings.experimental-features = [ "nix-command" "flakes" ];
       modules = [
         ./hosts/annabellee2/configuration.nix
         home-manager.nixosModules.home-manager
