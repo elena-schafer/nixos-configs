@@ -45,6 +45,8 @@
       #   }
       # ];
       containers = {
+        # options for icons can be found here
+	# https://github.com/mozilla/multi-account-containers/blob/aec2aa5fb0319192aacb2dd94f9d84ce0a835f9a/src/js/popup.js#L1893
         google = {
 	  name = "google";
 	  color = "purple";
@@ -63,6 +65,12 @@
 	  icon = "dollar";
 	  id = 3;
 	};
+        github = {
+	  name = "github";
+	  color = "blue";
+	  icon = "briefcase";
+	  id = 4;
+	};
       };
 
       extensions = {
@@ -72,44 +80,37 @@
 	  temporary-containers
 	  multi-account-containers
 	];
-        settings."{c607c8df-14a7-4f28-894f-29e8722976af}".settings = {
-	  # other options can be found in source code at https://github.com/stoically/temporary-containers/blob/main/src/background/preferences.ts
-	  automaticMode = {
-	    active = true;
-	    newTab = "created";
-	  };
-	  isolation = {
-	    global = {
-	      mouseClick = {
-	        middle = {
-		  action = "notsamedomain";
-                  container = "default";
-		};
+        settings = {
+	  "{c607c8df-14a7-4f28-894f-29e8722976af}".settings = {
+	    # other options can be found in source code at https://github.com/stoically/temporary-containers/blob/main/src/background/preferences.ts
+	    preferences = {
+	      automaticMode = {
+	        active = true;
+	        newTab = "created";
 	      };
-	    };
+	      isolation = {
+	        global = {
+	          mouseClick = {
+	            middle = {
+	              action = "notsamedomain";
+                      container = "default";
+	            };
+	          };
+	        };
+	      };
+            };
+	  };
+	  "@testpilot-containers".settings = {
+	    onboarding-stage = 8;
+	    achievements = [
+	      {
+	        name = "manyContainersOpened";
+		done = true;
+              }
+	    ];
 	  };
 	};
       };
-
-      # ExtensionSettings = {
-      #   "uBlock0@raymondhill.net" = {
-      #     install_url = "https://addons.mozilla.org/firefox/downloads/latest/ublock-origin/latest.xpi";
-      #     installation_mode = "force_installed";
-      #   };
-      #   "{c607c8df-14a7-4f28-894f-29e8722976af}" = {
-      #     install_url = "https://addons.mozilla.org/firefox/downloads/latest/temporary-containers/latest.xpi";
-      #     installation_mode = "force_installed";
-      #   };
-      #   "@testpilot-containers" = {
-      #     install_url = "https://addons.mozilla.org/firefox/downloads/latest/multi-account-containers/latest.xpi";
-      #     installation_mode = "force_installed";
-      #   };
-      #   # Currently not signed, also don't know if I really care about it
-      #   # "jid1-MnnxcxisBPnSXQ@jetpack" = {
-      #   #   install_url = "https://addons.mozilla.org/firefox/downloads/latest/privacy-badger17/latest.xpi";
-      #   #   installation_mode = "force_installed";
-      #   # };
-      # };
     };
     policies = {
       # Personal Preferences
