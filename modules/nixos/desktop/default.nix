@@ -5,6 +5,7 @@ let
 in {
   imports = [
     ./hyprland
+    ./recording.nix
   ];
   options.desktop = {
     enable = lib.mkEnableOption "Enable Desktop Installation";
@@ -21,6 +22,9 @@ in {
         pulse.enable = true;
       };
       libinput.enable = true;
+    };
+    programs = {
+      noisetorch.enable = true;
     };
     environment.systemPackages = with pkgs; [
       rofi-wayland
