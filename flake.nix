@@ -24,6 +24,7 @@
         value = nixpkgs.lib.nixosSystem {
           modules = [
             (./. + ("/hosts/" + host + "/configuration.nix")) # parenthesis are very exact
+	    (./. + "/modules/nixos")
 	    home-manager.nixosModules.home-manager
             {
               home-manager.useGlobalPkgs = true;
