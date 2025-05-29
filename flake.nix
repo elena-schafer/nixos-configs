@@ -18,30 +18,25 @@
     # TODO: Would like to make it so hosts need not be defined here
     # Rather automatically read the host options from the hosts/ dir and put them here
     # https://ayats.org/blog/no-flake-utils
+    nixosConfigurations = builtins.listToAttrs (builtins.map (
+      host: {
+        name = host;
+        value = nixpkgs.lib.nixosSystem {
+          modules = [
+            (./. + ("/hosts/" + host + "/configuration.nix")) # parenthesis are very exact
+	    home-manager.nixosModules.home-manager
+            {
+              home-manager.useGlobalPkgs = true;
+              home-manager.useUserPackages = true;
 
-    nixosConfigurations.cask1 = nixpkgs.lib.nixosSystem {
-      nixpkgs.config.allowUnfree = true;
-      nix.settings.experimental-features = [ "nix-command" "flakes" ];
-      modules = [ 
-        ./hosts/cask1/configuration.nix
-      ];
-    };
-    nixosConfigurations.annabellee2 = nixpkgs.lib.nixosSystem {
-      nixpkgs.config.allowUnfree = true;
-      nix.settings.experimental-features = [ "nix-command" "flakes" ];
-      modules = [
-        ./hosts/annabellee2/configuration.nix
-        home-manager.nixosModules.home-manager
-        {
-          home-manager.useGlobalPkgs = true;
-          home-manager.useUserPackages = true;
-
-          home-manager.users.elena = import hosts/annabellee2/home.nix;
-	  home-manager.extraSpecialArgs = { inherit inputs; };
-          home-manager.backupFileExtension = "backup";
-        }
-      ];
-    };
+              home-manager.users.elena = import hosts/annabellee2/home.nix;
+              home-manager.extraSpecialArgs = { inherit inputs; };
+              home-manager.backupFileExtension = "backup";
+            }
+          ];
+	};
+      }
+    ) (builtins.attrNames (builtins.readDir ./hosts)));
   };
 }
 
