@@ -1,12 +1,12 @@
 { config, lib, pkgs, ... }:
 
 let
-  cfg = config.recording;
+  cfg = config.desktop.recording;
 in {
   imports = [
     ./hyprland
   ];
-  options.recording = {
+  options.desktop.recording = {
     enable = lib.mkEnableOption "Enable Recording Software";
   };
   config = lib.mkIf cfg.enable {
