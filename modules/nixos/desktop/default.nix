@@ -6,6 +6,7 @@ in {
   imports = [
     ./hyprland
     ./recording.nix
+    ./gaming.nix
   ];
   options.desktop = {
     enable = lib.mkEnableOption "Enable Desktop Installation";
