@@ -10,34 +10,28 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
   };
-  outputs = inputs@{ self, nixpkgs, nur, home-manager, ... }: {
+  outputs = inputs@{ self, nixpkgs, home-manager, ... }: {
     # If we want to use some software early, overlays or patching are good trick to use
     # https://wiki.nixos.org/wiki/Nixpkgs/Patching_Nixpkgs
     # nixpkgs.overlays = [ (import ./overlay.nix) ];
 
-    # TODO: Would like to make it so hosts need not be defined here
-    # Rather automatically read the host options from the hosts/ dir and put them here
-    # https://ayats.org/blog/no-flake-utils
     nixosConfigurations = builtins.listToAttrs (builtins.map (
       host: {
         name = host;
         value = nixpkgs.lib.nixosSystem {
           modules = [
-            (./. + ("/hosts/" + host + "/configuration.nix")) # parenthesis are very exact
-	    (./. + "/modules/nixos")
-	    home-manager.nixosModules.home-manager
-            {
-              home-manager.useGlobalPkgs = true;
-              home-manager.useUserPackages = true;
-
-              home-manager.users.elena = import hosts/annabellee2/home.nix;
-              home-manager.extraSpecialArgs = { inherit inputs; };
-              home-manager.backupFileExtension = "backup";
-            }
+            ./hosts/${host}/configuration.nix
+	    			home-manager.nixosModules.home-manager
+						{
+						  home-manager.useGlobalPkgs = true;
+						  home-manager.useUserPackages = true;
+							home-manager.backupFileExtension = "home-backup";
+  						home-manager.extraSpecialArgs = { inherit inputs; };
+						  home-manager.users.elena = ./hosts/${host}/home.nix;
+						}
           ];
-	};
+				};
       }
     ) (builtins.attrNames (builtins.readDir ./hosts)));
   };
 }
-
