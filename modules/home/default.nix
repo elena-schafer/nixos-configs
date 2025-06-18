@@ -1,4 +1,4 @@
-{ inputs, configs, pkgs, ... }:
+inputs@{ configs, pkgs, astal, ... }:
 
 {
   imports = [
@@ -7,6 +7,7 @@
     ./alacritty.nix
     ./tmux.nix
     ./firefox.nix
+		./hyprland
   ];
 
   # TODO please change the username & home directory to your own
