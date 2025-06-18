@@ -1,6 +1,7 @@
 { inputs, config, lib, pkgs, ... }:
 
 {
+  home.file.".mozilla/firefox/elena/containers.json".force = lib.mkForce true;
   programs.firefox = {
     enable = true;
     profiles.elena = {
@@ -71,13 +72,18 @@
 	  icon = "briefcase";
 	  id = 4;
 	};
+        BSU = {
+	  name = "BSU";
+	  color = "orange";
+	  icon = "circle";
+	  id = 5;
+	};
       };
 
       extensions = {
         force = true; # clobber prexisting extensions
         packages = with inputs.firefox-addons.packages.${pkgs.system}; [
 	  ublock-origin
-	  temporary-containers
 	  multi-account-containers
 	];
         settings = {
