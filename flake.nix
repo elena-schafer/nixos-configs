@@ -11,15 +11,15 @@
     };
   };
   outputs = inputs@{ self, nixpkgs, home-manager, ... }: {
-    # If we want to use some software early, overlays or patching are good trick to use
-    # https://wiki.nixos.org/wiki/Nixpkgs/Patching_Nixpkgs
-    # nixpkgs.overlays = [ (import ./overlay.nix) ];
+  	# If we want to use some software early, overlays or patching are good trick to use
+  	# https://wiki.nixos.org/wiki/Nixpkgs/Patching_Nixpkgs
 
     nixosConfigurations = builtins.listToAttrs (builtins.map (
       host: {
         name = host;
         value = nixpkgs.lib.nixosSystem {
           modules = [
+						./overlays
             ./hosts/${host}/configuration.nix
 	    			home-manager.nixosModules.home-manager
 						{
