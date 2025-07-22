@@ -1,4 +1,4 @@
-inputs@{ configs, pkgs, astal, ... }:
+inputs@{ configs, pkgs, ... }:
 
 {
   imports = [
@@ -105,6 +105,10 @@ inputs@{ configs, pkgs, astal, ... }:
     # ethtool
     # pciutils # lspci
     # usbutils # lsusb
+
+		# TODO: Refactor into another module
+		zoom-us
+		krita
   ];
 
   # starship - an customizable prompt for any shell
