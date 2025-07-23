@@ -1,4 +1,4 @@
-inputs@{ configs, pkgs, ... }:
+inputs@{ config, lib, pkgs, ... }:
 
 let
 	cfg = config.desktop;
@@ -11,12 +11,12 @@ in {
   ];
 
 	options.desktop = {
-		enable = lib.mkEnableOption "Enable Desktop Programs"
-	}
+		enable = lib.mkEnableOption "Enable Desktop Programs";
+	};
 
 	config = lib.mkIf cfg.enable {
-		programs.noisetorch.enable = true;
 		home.packages = with pkgs; [
+			brave
       (discord.override {
         withOpenASAR = true;
 				withVencord = true;
@@ -28,6 +28,7 @@ in {
 			vlc
 			xfce.thunar
 			zoom-us
+			noisetorch
 		];
-	}
+	};
 }

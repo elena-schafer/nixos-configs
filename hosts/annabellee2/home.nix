@@ -21,5 +21,6 @@ inputs@{ configs, pkgs, home-manager, ... }:
 			position-y = 0;
 		}
 	];
+	desktop.enable = true;
 	desktop.streaming.enable = true;
 }
