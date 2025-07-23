@@ -1,4 +1,4 @@
-inputs@{ configs, pkgs, ... }:
+{ config, lib, pkgs, ... }:
 
 let 
 	cfg = config.desktop.streaming;
@@ -10,7 +10,6 @@ in {
 
 	config = lib.mkIf cfg.enable {
 		programs.obs-studio.enable = true;
-		programs.obs-studio.enableVirtualCamera = true;
 
   	# home.packages = with pkgs; [
   	# ];

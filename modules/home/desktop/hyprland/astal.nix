@@ -1,4 +1,4 @@
-inputs@{ configs, pkgs, ... }:
+inputs@{ configs, lib, pkgs, ... }:
 
 {
   # Packages that should be installed to the user profile.
