@@ -1,14 +1,11 @@
-inputs@{ configs, pkgs, ... }:
+inputs@{ config, lib, pkgs, ... }:
 
 {
   imports = [
     ./git.nix
     ./hyfetch.nix
-    ./alacritty.nix
     ./tmux.nix
-    ./firefox.nix
-		./hyprland
-		./streaming
+		./desktop
   ];
 
   # TODO please change the username & home directory to your own
