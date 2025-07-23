@@ -8,6 +8,7 @@ inputs@{ configs, pkgs, ... }:
     ./tmux.nix
     ./firefox.nix
 		./hyprland
+		./streaming
   ];
 
   # TODO please change the username & home directory to your own

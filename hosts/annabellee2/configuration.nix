@@ -3,6 +3,7 @@
 # https://search.nixos.org/options and in the NixOS manual (`nixos-help`).
 
 inputs@{ config, lib, pkgs, home-manager, ... }:
+# TODO: find a way to merge this and home.nix?
 
 {
   imports =
@@ -16,7 +17,6 @@ inputs@{ config, lib, pkgs, home-manager, ... }:
   desktop = {
     enable = true;
     hyprland.enable = true;
-    recording.enable = true;
     gaming.enable = true;
   };
 

@@ -5,7 +5,6 @@ let
 in {
   imports = [
     ./hyprland
-    ./recording.nix
     ./gaming.nix
   ];
   options.desktop = {
