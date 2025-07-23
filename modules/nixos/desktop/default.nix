@@ -15,6 +15,7 @@ in {
     # probably use assert
     # or this https://nixos.org/manual/nixos/stable/index.html#sec-assertions-warnings
 
+		programs.dconf.enable = true; # needed for easyeffects to work
     services = {
       printing.enable = true;
       pipewire = {

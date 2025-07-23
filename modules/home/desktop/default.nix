@@ -15,6 +15,9 @@ in {
 	};
 
 	config = lib.mkIf cfg.enable {
+		services.easyeffects = {
+			enable = true;
+		}
 		home.packages = with pkgs; [
 			brave
       (discord.override {
@@ -28,7 +31,6 @@ in {
 			vlc
 			xfce.thunar
 			zoom-us
-			noisetorch
 		];
 	};
 }
