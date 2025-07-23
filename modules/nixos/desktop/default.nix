@@ -23,16 +23,8 @@ in {
       };
       libinput.enable = true;
     };
-    programs = {
-      noisetorch.enable = true;
-    };
-    environment.systemPackages = with pkgs; [
-      rofi-wayland
-      (discord.override {
-        withOpenASAR = true;
-	withVencord = true;
-      })
-    ];
+    # environment.systemPackages = with pkgs; [
+    # ];
   };
 }
 

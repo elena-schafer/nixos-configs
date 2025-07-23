@@ -110,6 +110,8 @@ inputs@{ configs, pkgs, ... }:
 		# TODO: Refactor into another module
 		zoom-us
 		krita
+		xfce.thunar
+		vlc
   ];
 
   # starship - an customizable prompt for any shell
