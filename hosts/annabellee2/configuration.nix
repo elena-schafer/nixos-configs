@@ -13,6 +13,10 @@ inputs@{ config, lib, pkgs, home-manager, ... }:
     ];
   
   networking.hostName = "annabellee2"; # Define your hostname.
+
+	# If you're going to upload your configs, try to keep the timezone unspecific. Don't wanna make it too obvious what state you live in.
+	time.timeZone = "America/Denver";
+
   hardware.nvidia.enable = true;
   desktop = {
     enable = true;
