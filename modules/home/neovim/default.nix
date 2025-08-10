@@ -58,6 +58,7 @@ in
       plenary-nvim
       nvim-lspconfig
       nvim-treesitter
+      harpoon2
     ];
   };
 
