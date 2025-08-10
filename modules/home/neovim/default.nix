@@ -16,6 +16,7 @@
 		"nvim/lua/custom-keys.lua" = { text = lib.readFile ./config/lua/custom-keys.lua; };
 		"nvim/lua/plugins/init.lua" = { text = lib.readFile ./config/lua/plugins/init.lua; };
 		"nvim/lua/plugins/colorscheme.lua" = { text = lib.readFile ./config/lua/plugins/color-scheme.lua; };
+		"nvim/lua/plugins/oil.lua" = { text = lib.readFile ./config/lua/plugins/oil.lua; };
 	};
 	programs.neovim = {
 		enable = true;
