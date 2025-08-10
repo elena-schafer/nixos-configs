@@ -1,7 +1,8 @@
 return {
 	{
-		"catppuccin",
-		colorscheme = "catpuccin",
+		"catppuccin-nvim",
+		lazy = false,
+		--colorscheme = "catppuccin",
 		after = function()
 			require("catppuccin").setup({
 				flavour = "mocha",

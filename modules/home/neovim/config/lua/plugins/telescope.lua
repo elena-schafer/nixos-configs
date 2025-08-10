@@ -1,7 +1,7 @@
 return {
 	{
 		"telescope.nvim",
-		keys = {'<leader>ff', '<leader>fg', '<leader>fl', '<leader>fb', '<leader>fh', '<leader>en'},
+		keys = { '<leader>ff', '<leader>fg', '<leader>fl', '<leader>fb', '<leader>fh', '<leader>en' },
 		after = function()
 			local tele = require("telescope")
 			tele.setup({})
@@ -17,4 +17,8 @@ return {
 			end)
 		end,
 	},
+	{
+		"telescope-fzf-native.nvim",
+		dep_of = { "telescope.nvim" },
+	}
 }

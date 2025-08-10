@@ -33,33 +33,49 @@ let
         };
       }) (listFilesRecursiveStrings dirString)
     );
+  makeOptional = plugin: {
+    plugin = plugin;
+    optional = true;
+  };
+  makeListOptional = pluginList: map makeOptional pluginList;
 in
 {
   xdg.configFile = {
     "nvim/init.lua" = {
       text = ''
-        				require('options')
-        				require('lz.n').load('plugins')
-        				require('aliases')
-        				require('custom-keys')
-        			'';
+        							require('lz.n').load('plugins')
+        							require('options')
+        							require('aliases')
+        							require('custom-keys')
+               						'';
     };
   } // nvimDirToHomeFiles "/config";
   programs.neovim = {
     enable = true;
     defaultEditor = true;
-    plugins = with pkgs.vimPlugins; [
-      lz-n
-      catppuccin-nvim
-      oil-nvim
-      transparent-nvim
-      telescope-nvim
-      telescope-fzf-native-nvim
-      plenary-nvim
-      nvim-lspconfig
-      nvim-treesitter
-      harpoon2
-    ];
+    plugins =
+      [ pkgs.vimPlugins.lz-n ]
+      ++ makeListOptional (
+        with pkgs.vimPlugins;
+        [
+          catppuccin-nvim
+          oil-nvim
+          transparent-nvim
+          telescope-nvim
+          telescope-fzf-native-nvim
+          plenary-nvim
+          nvim-lspconfig
+          (nvim-treesitter.withPlugins (p: [
+            p.c
+            p.python
+            p.lua
+            p.nix
+          ]))
+          nvim-treesitter-textobjects
+          harpoon2
+          gitsigns-nvim
+        ]
+      );
   };
 
   home.packages = with pkgs; [

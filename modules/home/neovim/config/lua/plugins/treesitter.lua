@@ -48,4 +48,9 @@ return {
 			})
 		end
 	},
+	{
+		-- needed for textobject motions to work
+		"nvim-treesitter-textobjects",
+		dep_of = { "nvim-treesitter" },
+	},
 }

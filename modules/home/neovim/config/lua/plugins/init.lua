@@ -3,4 +3,8 @@ return {
 	{ import = "plugins.oil" },
 	{ import = "plugins.telescope" },
 	{ import = "plugins.lsp" },
+	{ import = "plugins.harpoon" },
+	{ import = "plugins.dependencies" },
+	{ import = "plugins.treesitter" },
+	{ import = "plugins.git" },
 }
