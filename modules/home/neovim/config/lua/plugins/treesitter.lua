@@ -2,6 +2,7 @@ return {
 	{
 		"nvim-treesitter",
 		lazy = false,
+		priority = 100,
 		after = function()
 			require('nvim-treesitter.configs').setup({
 				-- ensure_installed = { "c", "lua", "bash", "java", "json5", "python", "sql", "vim", "vimdoc", },
@@ -51,6 +52,7 @@ return {
 	{
 		-- needed for textobject motions to work
 		"nvim-treesitter-textobjects",
-		dep_of = { "nvim-treesitter" },
+		lazy = false,
+		priority = 50,
 	},
 }
