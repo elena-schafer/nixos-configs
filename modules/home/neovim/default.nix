@@ -17,6 +17,7 @@
 		"nvim/lua/plugins/init.lua" = { text = lib.readFile ./config/lua/plugins/init.lua; };
 		"nvim/lua/plugins/colorscheme.lua" = { text = lib.readFile ./config/lua/plugins/color-scheme.lua; };
 		"nvim/lua/plugins/oil.lua" = { text = lib.readFile ./config/lua/plugins/oil.lua; };
+		"nvim/lua/plugins/telescope.lua" = { text = lib.readFile ./config/lua/plugins/telescope.lua; };
 	};
 	programs.neovim = {
 		enable = true;
@@ -26,6 +27,9 @@
 			catppuccin-nvim
 			oil-nvim
 			transparent-nvim
+			telescope-nvim
+			telescope-fzf-native-nvim
+			plenary-nvim
 		];
 	};
 }
