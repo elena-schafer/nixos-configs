@@ -2,6 +2,7 @@ inputs@{ config, lib, pkgs, ... }:
 
 {
   imports = [
+		./core.nix
     ./git.nix
     ./hyfetch.nix
     ./tmux.nix
