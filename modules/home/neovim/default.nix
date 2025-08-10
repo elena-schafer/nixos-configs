@@ -57,6 +57,7 @@ in
       telescope-fzf-native-nvim
       plenary-nvim
       nvim-lspconfig
+      nvim-treesitter
     ];
   };
 
