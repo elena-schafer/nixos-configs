@@ -1,6 +1,23 @@
 { config, lib, pkgs, home-manager, ... }:
 
-# TODO: options for adding and removing functions such as notes and colorscheme, accomplish by breaking into modules.
+# TODO: options for adding and removing functions such as notes and colorscheme, accomplish by breaking into modules?
+let
+	# Very specific function for the purposes of this file.
+	# basically lib.filesystem.listFilesRecursive but avoiding putting anything in the nix store.
+	listFilesRecursiveStrings = 
+		dirString: 
+		lib.flatten (
+			lib.mapAttrsToList (
+				name: type:
+				if type == "directory" then
+					listFilesRecursiveStrings (dirString + "/${name}")
+				else
+					dirString + "/${name}"
+			) (builtins.readDir (./. + dirString))
+		);
+	# creates attr set of files for home-manager to insert into home from a directory.
+	nvimDirToHomeFiles = dirString: builtins.listToAttrs (map (file: { name = "nvim" + (builtins.substring (builtins.stringLength dirString) (builtins.stringLength file) file); value = { text = lib.readFile (./. + ("/" + file)); }; }) (listFilesRecursiveStrings dirString));
+in
 {
 	xdg.configFile = {
 		"nvim/init.lua" = { 
@@ -10,15 +27,8 @@
 				require('aliases')
 				require('custom-keys')
 			''; 
-		};
-		"nvim/lua/options.lua" = { text = lib.readFile ./config/lua/options.lua; };
-		"nvim/lua/aliases.lua" = { text = lib.readFile ./config/lua/aliases.lua; };
-		"nvim/lua/custom-keys.lua" = { text = lib.readFile ./config/lua/custom-keys.lua; };
-		"nvim/lua/plugins/init.lua" = { text = lib.readFile ./config/lua/plugins/init.lua; };
-		"nvim/lua/plugins/colorscheme.lua" = { text = lib.readFile ./config/lua/plugins/color-scheme.lua; };
-		"nvim/lua/plugins/oil.lua" = { text = lib.readFile ./config/lua/plugins/oil.lua; };
-		"nvim/lua/plugins/telescope.lua" = { text = lib.readFile ./config/lua/plugins/telescope.lua; };
-	};
+		}; 
+	} // nvimDirToHomeFiles "/config";
 	programs.neovim = {
 		enable = true;
 		defaultEditor = true;
