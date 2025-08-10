@@ -1,7 +1,19 @@
 return {
 	{
 		"harpoon2",
-		lazy = false, -- TODO: change to load on keys
+		-- lazy = false, -- TODO: change to load on keys
+		keys = {
+			"<Leader>a",
+			"<Leader>1",
+			"<Leader>2",
+			"<Leader>3",
+			"<Leader>4",
+			"<Leader>5",
+			"<Leader>6",
+			"<Leader>7",
+			"<Leader>8",
+			"<Leader>9",
+		},
 		-- dependencies = { "nvim-lua/plenary.nvim" },
 		after = function()
 			local harpoon = require("harpoon")
