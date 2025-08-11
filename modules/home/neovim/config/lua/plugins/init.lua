@@ -9,4 +9,5 @@ return {
 	{ import = "plugins.git" },
 	{ import = "plugins.autopairs" },
 	{ import = "plugins.lualine" },
+	{ import = "plugins.todo" },
 }

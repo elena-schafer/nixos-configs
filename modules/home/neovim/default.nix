@@ -76,6 +76,7 @@ in
           gitsigns-nvim
           nvim-autopairs
           lualine-nvim
+          todo-comments-nvim
         ]
       );
   };
