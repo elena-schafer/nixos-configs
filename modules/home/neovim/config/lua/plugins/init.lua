@@ -8,4 +8,5 @@ return {
 	{ import = "plugins.treesitter" },
 	{ import = "plugins.git" },
 	{ import = "plugins.autopairs" },
+	{ import = "plugins.lualine" },
 }

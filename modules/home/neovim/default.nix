@@ -75,6 +75,7 @@ in
           harpoon2
           gitsigns-nvim
           nvim-autopairs
+          lualine-nvim
         ]
       );
   };
