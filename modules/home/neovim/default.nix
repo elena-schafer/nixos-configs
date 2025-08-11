@@ -74,6 +74,7 @@ in
           nvim-treesitter-textobjects
           harpoon2
           gitsigns-nvim
+          nvim-autopairs
         ]
       );
   };

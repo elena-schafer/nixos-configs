@@ -7,4 +7,5 @@ return {
 	{ import = "plugins.dependencies" },
 	{ import = "plugins.treesitter" },
 	{ import = "plugins.git" },
+	{ import = "plugins.autopairs" },
 }
