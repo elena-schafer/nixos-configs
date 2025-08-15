@@ -77,6 +77,9 @@ in
           nvim-autopairs
           lualine-nvim
           todo-comments-nvim
+          zk-nvim
+          render-markdown-nvim
+          markdown-nvim
         ]
       );
   };
