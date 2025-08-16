@@ -91,6 +91,11 @@ in
         render-markdown-nvim
         markdown-nvim
         vimtex
+        luasnip
+        nvim-cmp
+        cmp_luasnip
+        cmp-nvim-lsp
+        cmp-vimtex
       ]
     );
   };

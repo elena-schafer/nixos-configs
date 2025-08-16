@@ -12,4 +12,6 @@ return {
 	{ import = "plugins.todo" },
 	{ import = "plugins.zk-nvim" },
 	{ import = "plugins.vimtex" },
+	{ import = "plugins.cmp" },
+	{ import = "plugins.luasnip" },
 }
