@@ -1,8 +1,14 @@
-{ config, lib, pkgs, ... }:
+{
+  config,
+  lib,
+  pkgs,
+  ...
+}:
 
 let
   cfg = config.desktop;
-in {
+in
+{
   imports = [
     ./hyprland
     ./gaming.nix
@@ -11,11 +17,11 @@ in {
     enable = lib.mkEnableOption "Enable Desktop Installation";
   };
   config = lib.mkIf cfg.enable {
-    # TODO: ensure only one desktop environment is enabled 
-    # probably use assert
-    # or this https://nixos.org/manual/nixos/stable/index.html#sec-assertions-warnings
 
-		programs.dconf.enable = true; # needed for easyeffects to work
+    services.greetd.enable = true;
+    programs.regreet.enable = true;
+
+    programs.dconf.enable = true; # needed for easyeffects to work
     services = {
       printing.enable = true;
       pipewire = {
@@ -28,4 +34,3 @@ in {
     # ];
   };
 }
-
