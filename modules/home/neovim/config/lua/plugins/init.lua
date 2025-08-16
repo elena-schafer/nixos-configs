@@ -11,4 +11,5 @@ return {
 	{ import = "plugins.lualine" },
 	{ import = "plugins.todo" },
 	{ import = "plugins.zk-nvim" },
+	{ import = "plugins.vimtex" },
 }

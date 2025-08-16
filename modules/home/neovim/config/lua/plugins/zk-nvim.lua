@@ -66,6 +66,7 @@ return {
 			-- note more keybinds can be found in the file type plugin for markdown
 			local opts = { noremap = true, silent = false }
 
+			-- TODO: refactor to use $ZK_NOTEBOOK_DIR
 			-- Open index
 			vim.keymap.set("n", "<leader>zi", "<cmd>e ~/notes/index.md<CR>", opts)
 			-- Open quick note
