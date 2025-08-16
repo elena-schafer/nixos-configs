@@ -1,8 +1,14 @@
-{ config, lib, pkgs, ... }:
+{
+  config,
+  lib,
+  pkgs,
+  ...
+}:
 
 let
   cfg = config.desktop.hyprland;
-in {
+in
+{
   options = {
     desktop.hyprland.enable = lib.mkEnableOption "Enable Hyprland";
   };
@@ -12,9 +18,6 @@ in {
       enable = true;
       xwayland.enable = true;
     };
-    environment.systemPackages = with pkgs; [
-		  hyprpaper
-		];
+    security.pam.services.hyprlock = { };
   };
 }
-
