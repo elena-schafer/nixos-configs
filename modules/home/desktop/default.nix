@@ -14,6 +14,7 @@ in
     ./firefox.nix
     ./hyprland
     ./streaming
+    ./defaultApps.nix
   ];
 
   options.desktop = {
