@@ -10,28 +10,35 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
   };
-  outputs = inputs@{ self, nixpkgs, home-manager, ... }: {
-  	# If we want to use some software early, overlays or patching are good trick to use
-  	# https://wiki.nixos.org/wiki/Nixpkgs/Patching_Nixpkgs
+  outputs =
+    inputs@{
+      self,
+      nixpkgs,
+      home-manager,
+      ...
+    }:
+    {
+      # If we want to use some software early, overlays or patching are good trick to use
+      # https://wiki.nixos.org/wiki/Nixpkgs/Patching_Nixpkgs
 
-    nixosConfigurations = builtins.listToAttrs (builtins.map (
-      host: {
-        name = host;
-        value = nixpkgs.lib.nixosSystem {
-          modules = [
-						./overlays
-            ./hosts/${host}/configuration.nix
-	    			home-manager.nixosModules.home-manager
-						{
-						  home-manager.useGlobalPkgs = true;
-						  home-manager.useUserPackages = true;
-							home-manager.backupFileExtension = "home-backup";
-  						home-manager.extraSpecialArgs = { inherit inputs; };
-						  home-manager.users.elena = ./hosts/${host}/home.nix;
-						}
-          ];
-				};
-      }
-    ) (builtins.attrNames (builtins.readDir ./hosts)));
-  };
+      nixosConfigurations = builtins.listToAttrs (
+        builtins.map (host: {
+          name = host;
+          value = nixpkgs.lib.nixosSystem {
+            modules = [
+              ./overlays
+              ./hosts/${host}/configuration.nix
+              home-manager.nixosModules.home-manager
+              {
+                home-manager.useGlobalPkgs = true;
+                home-manager.useUserPackages = true;
+                home-manager.backupFileExtension = "home-backup";
+                home-manager.extraSpecialArgs = { inherit inputs; };
+                home-manager.users.elena = ./hosts/${host}/home.nix;
+              }
+            ];
+          };
+        }) (builtins.attrNames (builtins.readDir ./hosts))
+      );
+    };
 }

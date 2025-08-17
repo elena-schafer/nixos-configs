@@ -1,21 +1,26 @@
-inputs@{ config, lib, pkgs, ... }:
+inputs@{
+  config,
+  lib,
+  pkgs,
+  ...
+}:
 
 {
   imports = [
-		./core.nix
+    ./core.nix
     ./git.nix
     ./hyfetch.nix
     ./tmux.nix
-		./desktop
+    ./desktop
   ];
 
   # TODO please change the username & home directory to your own
   home.username = "elena";
   home.homeDirectory = "/home/elena";
 
-	services.udiskie = {
-	  enable = true;
-	};
+  services.udiskie = {
+    enable = true;
+  };
 
   # link the configuration file in current directory to the specified location in home directory
   # home.file.".config/i3/wallpaper.jpg".source = ./wallpaper.jpg;
@@ -89,7 +94,7 @@ inputs@{ config, lib, pkgs, ... }:
     # hugo # static site generator
     # glow # markdown previewer in terminal
 
-    btop  # replacement of htop/nmon
+    btop # replacement of htop/nmon
     # iotop # io monitoring
     # iftop # network monitoring
 
@@ -105,11 +110,11 @@ inputs@{ config, lib, pkgs, ... }:
     # pciutils # lspci
     # usbutils # lsusb
 
-		# TODO: Refactor into another module
-		zoom-us
-		krita
-		xfce.thunar
-		vlc
+    # TODO: Refactor into another module
+    zoom-us
+    krita
+    xfce.thunar
+    vlc
   ];
 
   # starship - an customizable prompt for any shell
