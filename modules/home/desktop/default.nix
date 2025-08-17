@@ -41,6 +41,8 @@ in
       libreoffice
       hunspell # required for libreoffice spell check
       hunspellDicts.en_US
+
+      bitwarden-desktop
     ];
   };
 }
