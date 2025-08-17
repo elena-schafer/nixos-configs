@@ -15,6 +15,7 @@ in
     ./hyprland
     ./streaming
     ./defaultApps.nix
+    ./wifi
   ];
 
   options.desktop = {
