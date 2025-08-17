@@ -6,7 +6,7 @@ inputs@{
 }:
 
 {
-  xdg.mineApps.defaultApplications = {
+  xdg.mimeApps.defaultApplications = {
     "application/pdf" = [ "firefox.desktop" ];
     "text/html" = [ "firefox.desktop" ];
   };
