@@ -14,7 +14,8 @@ fi
 # Check if all hardware is rfkilled, and offer airplane mode options
 if rfkill -o SOFT | grep "unblocked" ; then
 	airplane="✈ Enable Airplane Mode"
-	list="$toggle\n$airplane\n$wifi_list"
+	hidden=" Hidden Network"
+	list="$toggle\n$airplane\n$wifi_list\n$hidden"
 else
 	airplane="✈ Disable Airplane Mode"
 	list="$airplane"
@@ -43,9 +44,16 @@ else
 	if [[ $(echo "$saved_connections" | grep -w "$chosen_id") = "$chosen_id" ]]; then
 		nmcli connection up id "$chosen_id" | grep "successfully" && notify-send "Connection Established" "$success_message"
 	else
+		if [ "$chosen_network" = " Hidden Network" ]; then
+			chosen_id=$(rofi -dmenu -p "Wi-Fi SSID: " )
+		fi
 		if [[ "$chosen_network" =~ "" ]]; then
 			wifi_password=$(rofi -dmenu -p "Password: " )
 		fi
-		nmcli device wifi connect "$chosen_id" password "$wifi_password" | grep "successfully" && notify-send "Connection Established" "$success_message"
-    fi
+		if [ "$chosen_network" = " Hidden Network" ]; then
+			nmcli device wifi connect "$chosen_id" password "$wifi_password" hidden yes | grep "successfully" && notify-send "Connection Established" "$success_message"
+		else
+			nmcli device wifi connect "$chosen_id" password "$wifi_password" | grep "successfully" && notify-send "Connection Established" "$success_message"
+		fi
+  fi
 fi
