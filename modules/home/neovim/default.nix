@@ -106,6 +106,7 @@ in
     nixfmt-rfc-style
     zathura
     texliveFull
+    zk
   ];
   # home.file.".local/share/applications/zknote.desktop".text = ''
   #   		[Desktop Entry]

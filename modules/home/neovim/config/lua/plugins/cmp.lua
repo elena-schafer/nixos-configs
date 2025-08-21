@@ -9,8 +9,8 @@ return {
 		"nvim-cmp",
 		lazy = false,
 		after = function()
-			local luasnip = require("luasnip")
 			local cmp = require("cmp")
+			local luasnip = require("luasnip")
 			cmp.setup({
 				snippet = {
 					-- REQUIRED - you must specify a snippet engine

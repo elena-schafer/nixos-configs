@@ -1,6 +1,8 @@
 return {
 	{
 		"luasnip",
+		lazy = false,
+		priority = 100,
 		after = function()
 			local ls = require("luasnip")
 			ls.setup({
@@ -9,5 +11,6 @@ return {
 			})
 			require("luasnip.loaders.from_lua").load({ paths = "~/.config/nvim/lua/snippets/" })
 		end,
+		dep_of = { "nvim-cmp", "cmp_luasnip", },
 	},
 }
