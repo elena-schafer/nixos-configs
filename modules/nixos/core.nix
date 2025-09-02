@@ -23,6 +23,7 @@
     efiInstallAsRemovable = true; # necessary to boot in virtual box
     devices = [ "nodev" ];
   };
+  services.openssh.enable = true;
 
   networking.networkmanager.enable = true;
   # environment.etc."polkit-1/rules.d/50-org.freedesktop.NetworkManager.rules" = {
