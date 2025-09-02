@@ -37,12 +37,12 @@ in
       # TODO: change workspace keybinds based on monitor count (only setups for 1-2 monitors for now I guess)
       # TODO: fix cursor
       settings = {
-        monitor = (
-          builtins.map (
+        monitor =
+          (builtins.map (
             monitor:
             "$mon${toString monitor.index},${toString monitor.width}x${toString monitor.height},${toString monitor.position-x}x${toString monitor.position-y},1"
-          ) cfg.monitors
-        );
+          ) cfg.monitors)
+          ++ [ ",preferred,auto,1" ];
       }
       // builtins.listToAttrs (
         builtins.map (monitor: {
