@@ -12,23 +12,62 @@ return {
 				picker = "telescope",
 			})
 
+			local characterMap = { "0", "1", "2", "3", "4", "5", "6", "7", "8", "9", "a", "b", "c", "d", "e", "f", "g", "h",
+				"i", "j", "k", "l", "m", "n", "o", "p", "q", "r", "s", "t", "u", "v", "w", "x", "y", "z", }
+			local function generateID()
+				local ID = ""
+				for i = 1, 4, 1 do
+					ID = ID .. characterMap[(vim.fn.rand() % 36) + 1]
+				end
+				return ID
+			end
 
+			-- TODO: change these two to create a new line when inserting?
 			-- Custom command to create new note and insert a wiki link with the title of the note
 			commands.add("ZkNewWithLink", function(options)
-				-- more properly we should use the options param to make the function reusable, but idc
+				assert(vim.bo.filetype == "markdown" or vim.bo.filetype == "tex", "error: invalid filetype for command")
+				-- TODO: make functional in latex files
 				local title = vim.fn.input('Title: ')
 				options = vim.tbl_extend("force", { title = title }, options or {})
 				api.new(options.notebook_path, options, function(err, res)
 					assert(not err, tostring(err))
 					local path = vim.fs.basename(res.path) -- remove path to notebook
 					local noteID = path:sub(0, -4)
-					local link = "[[" .. noteID .. "|" .. title .. "]]"
+					local link
+					if vim.bo.filetype == "markdown" then
+						link = "[[" .. noteID .. "|" .. title .. "]]"
+					elseif vim.bo.filetype == "tex" then
+						link = "\\href{zknote://" .. noteID .. ".md}{" .. title .. "}"
+					end
 					local pos = vim.api.nvim_win_get_cursor(0)[2]
 					local line = vim.api.nvim_get_current_line()
 					local nline = line:sub(0, pos) .. link .. line:sub(pos + 1)
 					vim.api.nvim_set_current_line(nline)
 					vim.cmd("edit " .. res.path)
 				end)
+			end)
+
+			-- Custom command to create new latex note and insert a wiki link with the title of the note
+			commands.add("ZkNewLatexWithLink", function(options)
+				assert(vim.bo.filetype == "markdown" or vim.bo.filetype == "tex", "error: invalid filetype for command")
+				local title = vim.fn.input('Title: ')
+				assert(title ~= "", "error: title is required")
+				local noteID = generateID()
+				local link
+				if vim.bo.filetype == "markdown" then
+					link = "[[latex/" .. noteID .. "|" .. title .. "]]"
+				elseif vim.bo.filetype == "tex" then
+					link = "\\href{zknote://" .. noteID .. ".tex}{" .. title .. "}"
+				end
+				local pos = vim.api.nvim_win_get_cursor(0)[2]
+				local line = vim.api.nvim_get_current_line()
+				local nline = line:sub(0, pos) .. link .. line:sub(pos + 1)
+				vim.api.nvim_set_current_line(nline)
+				-- TODO: remove hardcoding of notebook path
+				vim.cmd("e ~/notes/latex/" .. noteID .. ".tex")
+				vim.cmd("r ~/notes/.zk/templates/default.tex")
+				vim.cmd("w")
+				-- TODO: auto add title
 			end)
 
 			-- Custom command to insert a wiki link with the title of the note

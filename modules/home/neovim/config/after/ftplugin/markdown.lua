@@ -66,6 +66,7 @@ if require("zk.util").notebook_root(vim.fn.expand('%:p')) ~= nil then
 
 	-- Create a new note after asking for its title, and insert a link to it at current cursor location.
 	map("n", "<leader>zc", "<cmd>ZkNewWithLink<CR>", opts)
+	map("n", "<leader>zlc", "<cmd>ZkNewLatexWithLink<CR>", opts)
 
 	-- Create a new note in the same directory as the current buffer, using the current selection for note content and asking for its title.
 	-- map("v", "<leader>znc", ":'<,'>ZkNewFromContentSelection { dir = vim.fn.expand('%:p:h'), title = vim.fn.input('Title: ') }<CR>", opts)
@@ -75,7 +76,7 @@ if require("zk.util").notebook_root(vim.fn.expand('%:p')) ~= nil then
 	-- Alternative for backlinks using pure LSP and showing the source context.
 	--map('n', '<leader>zb', '<Cmd>lua vim.lsp.buf.references()<CR>', opts)
 	-- Open notes linked by the current buffer.
-	map("n", "<leader>zl", "<Cmd>ZkLinks<CR>", opts)
+	map("n", "<leader>zll", "<Cmd>ZkLinks<CR>", opts)
 
 	-- Preview a linked note.
 	map("n", "K", "<Cmd>lua vim.lsp.buf.hover()<CR>", opts)
